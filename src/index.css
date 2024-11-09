@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --content-bg: #1a1f2e;
+    --content-hover: #2a2f3e;
+    --content-active: #3a3f4e;
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Custom slider styles */
+input[type="range"] {
+  -webkit-appearance: none;
+  @apply w-full h-1 rounded-full bg-[#2a2f3e];
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  @apply w-4 h-4 rounded-full bg-[#2563eb] cursor-pointer transition-transform hover:scale-110;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-4 h-4 rounded-full bg-[#2563eb] cursor-pointer border-0 transition-transform hover:scale-110;
+}
+
+/* Smooth transitions */
+.transition-all {
+  @apply transition-[background-color,transform,opacity,width] duration-200 ease-in-out;
+}
