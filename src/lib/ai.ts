@@ -46,7 +46,22 @@ export async function fixGrammar(text: string): Promise<AIResponse> {
 }
 
 export async function expandText(text: string, stylePrompt: string): Promise<AIResponse> {
-  return callAI(stylePrompt, text);
+  const prompt = `
+    ${stylePrompt}
+    
+    Original text:
+    ${text}
+    
+    Additional instructions:
+    - Maintain proper markdown formatting
+    - Use appropriate heading levels (h1, h2, h3)
+    - Include bold and italic text for emphasis
+    - Add bullet points and numbered lists where appropriate
+    - Optimize for readability and engagement
+    - Keep the tone consistent with the selected style
+  `;
+  
+  return callAI(prompt, text);
 }
 
 export async function translateToEnglish(text: string): Promise<AIResponse> {
@@ -62,15 +77,29 @@ export async function generateSEOContent(title: string, length: number): Promise
     5: 2000
   };
 
-  const prompt = `Generate SEO-friendly markdown content about "${title}" in approximately ${wordCounts[length as keyof typeof wordCounts]} words. 
-    Include:
-    - Engaging introduction
-    - Relevant headings and subheadings
-    - Key points and details
-    - Natural keyword usage
-    - Clear structure
-    - Conclusion
-    Format using markdown with proper headings (#, ##), lists, and emphasis (* for italic, ** for bold) where appropriate.`;
+  const targetWords = wordCounts[length as keyof typeof wordCounts];
+
+  const prompt = `Generate SEO-friendly markdown content about "${title}" that is EXACTLY ${targetWords} words long (±10 words). 
+    
+    Required Structure:
+    1. Title (H1)
+    2. Brief meta description (100-155 characters)
+    3. Table of Contents
+    4. Introduction (10% of content)
+    5. Main sections with H2 and H3 headings (75% of content)
+    6. Conclusion (15% of content)
+    
+    Requirements:
+    - MUST be exactly ${targetWords} words (±10 words)
+    - Use proper markdown formatting
+    - Include relevant keywords naturally
+    - Use bullet points and numbered lists
+    - Add bold and italic emphasis
+    - Maintain consistent heading hierarchy
+    - Optimize for featured snippets
+    - Include relevant statistics or data points
+    
+    Note: The word count is critical - ensure the output is ${targetWords} words (±10 words).`;
 
   return callAI(prompt, title);
 }

@@ -23,8 +23,8 @@ const ADMIN_CREDENTIALS = {
 };
 
 const DEFAULT_SOCIAL_LINKS = {
-  github: 'https://github.com/antfu',
-  twitter: 'https://x.com/antfu7'
+  github: 'https://github.com/test',
+  twitter: 'https://x.com/test'
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {

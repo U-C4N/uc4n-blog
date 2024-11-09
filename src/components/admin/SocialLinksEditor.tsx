@@ -4,8 +4,8 @@ import { useAuth } from '../../contexts/AuthContext';
 
 export function SocialLinksEditor() {
   const { socialLinks, updateSocialLinks } = useAuth();
-  const [github, setGithub] = useState(socialLinks.github);
-  const [twitter, setTwitter] = useState(socialLinks.twitter);
+  const [github, setGithub] = useState(socialLinks.github || 'https://github.com/umutcn');
+  const [twitter, setTwitter] = useState(socialLinks.twitter || 'https://x.com/umutcn');
   const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
